@@ -1,0 +1,74 @@
+{% extends 'shaadi/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- About Header -->
+<section class="py-5 bg-danger text-white">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold">About Rishta.com</h1>
+        <p class="lead">Trusted by thousands of families since 2010</p>
+    </div>
+</section>
+
+<!-- Our Story -->
+<section class="py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 mb-4">
+                <img src="{% static 'shaadi/images/download4.jpeg' %}" alt="Our Team" class="img-fluid rounded shadow">
+            </div>
+            <div class="col-md-6">
+                <h2 class="text-danger mb-4">Our Story</h2>
+                <p>Founded in 2010, Rishta.com has become India's leading matrimonial service. We started with a simple mission: to help people find their perfect life partners through a trusted and secure platform.</p>
+                <p>Over the years, we've successfully matched thousands of couples who are now happily married. Our unique compatibility algorithm and personalized matchmaking services set us apart in the industry.</p>
+                <p>We understand the importance of cultural values, family expectations, and personal preferences in marriage, which is why we've designed our service to cater specifically to Indian families.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission & Values -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="text-danger">Our Mission & Values</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow">
+                    <div class="card-body text-center p-4">
+                        <div class="text-danger mb-3">
+                            <i class="bi bi-shield-check fs-1"></i>
+                        </div>
+                        <h3>Trust & Safety</h3>
+                        <p>Rigorous profile verification and privacy controls ensure a safe environment for all members</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow">
+                    <div class="card-body text-center p-4">
+                        <div class="text-danger mb-3">
+                            <i class="bi bi-hearts fs-1"></i>
+                        </div>
+                        <h3>Compatibility</h3>
+                        <p>Our advanced algorithm matches based on values, lifestyle, and personal preferences</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow">
+                    <div class="card-body text-center p-4">
+                        <div class="text-danger mb-3">
+                            <i class="bi bi-people fs-1"></i>
+                        </div>
+                        <h3>Family Focus</h3>
+                        <p>We respect family values and provide features for family involvement in the process</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'shaadi/base.html' %}
+{% block content %}
+<div class="container py-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center py-3">
+            <div class="d-flex align-items-center">
+                <a href="{% url 'inbox' %}" class="text-white me-3"><i class="bi bi-arrow-left"></i></a>
+                {% if other_user.profile_picture %}
+                <img src="{{ other_user.profile_picture.url }}" class="rounded-circle me-3" width="40" height="40" alt="{{ other_user.get_full_name }}">
+                {% else %}
+                <div class="bg-light rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                    <i class="bi bi-person text-secondary"></i>
+                </div>
+                {% endif %}
+                <h5 class="mb-0">{{ other_user.get_full_name }}</h5>
+            </div>
+            <div>
+                <a href="{% url 'browse_profiles' %}" class="btn btn-outline-light btn-sm">
+                    <i class="bi bi-search"></i> Browse More
+                </a>
+            </div>
+        </div>
+        
+        <div class="card-body p-0" style="height: 60vh; overflow-y: auto;" id="chat-messages">
+            {% for message in messages %}
+            <div class="d-flex mb-3 {% if message.sender == request.user %}justify-content-end{% else %}justify-content-start{% endif %}">
+                <div class="card {% if message.sender == request.user %}bg-danger text-white{% else %}bg-light{% endif %}" style="max-width: 75%;">
+                    <div class="card-body p-3">
+                        <p class="card-text mb-0">{{ message.content }}</p>
+                        <small class="d-block text-end {% if message.sender == request.user %}text-white-50{% else %}text-muted{% endif %}">
+                            {{ message.timestamp|date:"g:i A" }}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="h-100 d-flex align-items-center justify-content-center">
+                <div class="text-center p-4">
+                    <i class="bi bi-chat-heart fs-1 text-danger"></i>
+                    <h4 class="mt-3">Start a Conversation</h4>
+                    <p class="text-muted">Send your first message to {{ other_user.first_name }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="card-footer">
+            <form method="POST" class="d-flex">
+                {% csrf_token %}
+                <input type="text" name="content" class="form-control me-2" placeholder="Type your message..." required>
+                <button type="submit" class="btn btn-danger">
+                    <i class="bi bi-send"></i> Send
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Auto-scroll to bottom of chat
+    window.onload = function() {
+        const chatContainer = document.getElementById('chat-messages');
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    };
+</script>
+{% endblock %}

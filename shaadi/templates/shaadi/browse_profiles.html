@@ -1,0 +1,50 @@
+{% extends 'shaadi/base.html' %}
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="text-danger">Browse Profiles</h1>
+        <div class="d-flex gap-2">
+            <a href="{% url 'inbox' %}" class="btn btn-danger position-relative">
+                <i class="bi bi-envelope"></i> Messages
+                {% if unread_count %}<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-danger">{{ unread_count }}</span>{% endif %}
+            </a>
+        </div>
+    </div>
+    
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for profile in profiles %}
+        <div class="col">
+            <div class="card h-100 shadow">
+                {% if profile.profile_picture %}
+                <img src="{{ profile.profile_picture.url }}" class="card-img-top" alt="{{ profile.get_full_name }}" style="height: 250px; object-fit: cover;">
+                {% else %}
+                <div class="bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
+                    <i class="bi bi-person fs-1 text-secondary"></i>
+                </div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ profile.get_full_name }}</h5>
+                    <p class="card-text">
+                        <i class="bi bi-gender-ambiguous"></i> {{ profile.get_gender_display }}<br>
+                        <i class="bi bi-calendar"></i> {{ profile.age }} years<br>
+                        <i class="bi bi-book"></i> {{ profile.education }}<br>
+                        <i class="bi bi-briefcase"></i> {{ profile.profession }}
+                    </p>
+                </div>
+                <div class="card-footer bg-white">
+                    <a href="{% url 'chat' profile.id %}" class="btn btn-danger w-100">
+                        <i class="bi bi-chat"></i> Send Message
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info text-center">
+                No profiles match your preferences. Try adjusting your search criteria.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

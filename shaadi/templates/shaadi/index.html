@@ -1,0 +1,101 @@
+{% extends 'shaadi/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero-section d-flex align-items-center text-white">
+    <div class="container text-center">
+        <h1 class="display-2 fw-bold">Find Your Perfect Match</h1>
+        <p class="lead mb-4">Join thousands of successful marriages through our trusted matchmaking service</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{% url 'register' %}" class="btn btn-danger btn-lg px-5">Create Profile</a>
+            <a href="{% url 'login' %}" class="btn btn-outline-light btn-lg px-5">Login</a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="text-danger">How It Works</h2>
+            <p class="lead">Three simple steps to find your life partner</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 shadow card-hover">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-danger bg-opacity-10 text-danger rounded-circle p-3 d-inline-block mb-3">
+                            <i class="bi bi-person-plus fs-1"></i>
+                        </div>
+                        <h3>Create Profile</h3>
+                        <p>Register and create your profile with essential details and preferences</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow card-hover">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-danger bg-opacity-10 text-danger rounded-circle p-3 d-inline-block mb-3">
+                            <i class="bi bi-search-heart fs-1"></i>
+                        </div>
+                        <h3>Find Matches</h3>
+                        <p>Our intelligent algorithm will suggest compatible matches based on your preferences</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow card-hover">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-danger bg-opacity-10 text-danger rounded-circle p-3 d-inline-block mb-3">
+                            <i class="bi bi-chat-heart fs-1"></i>
+                        </div>
+                        <h3>Connect & Marry</h3>
+                        <p>Connect with your matches through our secure platform and begin your journey</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Success Stories -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="text-danger">Success Stories</h2>
+            <p class="lead">Real couples who found love through Rishta.com</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <img src="{% static 'shaadi/images/download1.jpeg' %}" class="card-img-top" alt="Couple 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Aman & Ayesha</h5>
+                        <p class="card-text">"We connected through Rishta.com and found we had so much in common. Married for 2 years now!"</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <img src="{% static 'shaadi/images/download2.jpeg' %}" class="card-img-top" alt="Couple 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Saurabh & Nikita</h5>
+                        <p class="card-text">"The compatibility matching helped us find each other. Thank you Rishta.com!"</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mx-auto">
+                <div class="card">
+                    <img src="{% static 'shaadi/images/download3.jpeg' %}" class="card-img-top" alt="Couple 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Ankit & Suman</h5>
+                        <p class="card-text">"We were both hesitant about online matchmaking, but Rishta.com changed our lives."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

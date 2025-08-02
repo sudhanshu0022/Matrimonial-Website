@@ -1,0 +1,50 @@
+{% extends 'shaadi/base.html' %}
+{% block content %}
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-danger text-white text-center py-4">
+                        <h2><i class="bi bi-person-circle me-2"></i>Member Login</h2>
+                    </div>
+                    <div class="card-body p-4 p-md-5">
+                        <form method="POST">
+                            {% csrf_token %}
+                            
+                            {% if form.errors %}
+                                <div class="alert alert-danger">
+                                    Invalid username or password
+                                </div>
+                            {% endif %}
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Username</label>
+                                {{ form.username }}
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                {{ form.password }}
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="remember">
+                                <label class="form-check-label" for="remember">Remember me</label>
+                                <a href="{% url 'password_reset' %}" class="float-end text-danger">Forgot Password?</a>
+                            </div>
+                            <div class="d-grid mb-3">
+                                <button type="submit" class="btn btn-danger btn-lg">Login</button>
+                            </div>
+                            <div class="text-center pt-4">
+                                <p class="mb-0">
+                                    Don't have an account? 
+                                    <a href="{% url 'register' %}" class="text-danger fw-bold">Register Now</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

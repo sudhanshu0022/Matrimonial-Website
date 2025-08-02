@@ -1,0 +1,105 @@
+{% extends 'shaadi/base.html' %}
+{% block content %}
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-danger text-white text-center py-4">
+                        <h2><i class="bi bi-person-circle me-2"></i>My Profile</h2>
+                        <p class="mb-0">Complete your profile to find better matches</p>
+                    </div>
+                    <div class="card-body p-4 p-md-5">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            
+                            <div class="text-center mb-4">
+                                {% if user.profile_picture %}
+                                    <img src="{{ user.profile_picture.url }}" 
+                                         class="rounded-circle mb-3" 
+                                         width="120" height="120" 
+                                         alt="Profile Picture">
+                                {% else %}
+                                    <div class="bg-light rounded-circle d-flex align-items-center justify-content-center mb-3" 
+                                         style="width: 120px; height: 120px;">
+                                        <i class="bi bi-person fs-1 text-secondary"></i>
+                                    </div>
+                                {% endif %}
+                                {{ form.profile_picture }}
+                            </div>
+                            
+                            <h4 class="mb-4 text-danger">Personal Information</h4>
+                            <div class="row mb-4">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">First Name</label>
+                                    {{ form.first_name }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Last Name</label>
+                                    {{ form.last_name }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Email</label>
+                                    {{ form.email }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Phone</label>
+                                    {{ form.phone }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Gender</label>
+                                    {{ form.gender }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Date of Birth</label>
+                                    {{ form.date_of_birth }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Religion</label>
+                                    {{ form.religion }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Profession</label>
+                                    {{ form.profession }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Education</label>
+                                    {{ form.education }}
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label class="form-label">Address</label>
+                                    {{ form.address }}
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label class="form-label">About Me</label>
+                                    {{ form.bio }}
+                                </div>
+                            </div>
+                            
+                            <h4 class="mb-4 text-danger">Partner Preferences</h4>
+                            <div class="row mb-4">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Minimum Age</label>
+                                    {{ form.preferred_age_min }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Maximum Age</label>
+                                    {{ form.preferred_age_max }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Preferred Religion</label>
+                                    {{ form.preferred_religion }}
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-danger btn-lg">Update Profile</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

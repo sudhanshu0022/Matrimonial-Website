@@ -1,0 +1,57 @@
+{% extends 'shaadi/base.html' %}
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-danger mb-4">Your Messages</h1>
+    
+    {% if conversations %}
+    <div class="list-group">
+        {% for conv_data in conversations %}
+        {% with conversation=conv_data.conversation other_user=conv_data.other_user %}
+        <a href="{% url 'chat' other_user.id %}" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <div class="d-flex align-items-center">
+                    {% if other_user.profile_picture %}
+                    <img src="{{ other_user.profile_picture.url }}" class="rounded-circle me-3" width="50" height="50" alt="{{ other_user.get_full_name }}">
+                    {% else %}
+                    <div class="bg-light rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                        <i class="bi bi-person fs-4 text-secondary"></i>
+                    </div>
+                    {% endif %}
+                    <h5 class="mb-0">{{ other_user.get_full_name }}</h5>
+                </div>
+                <small class="text-muted">{{ conversation.updated_at|timesince }} ago</small>
+            </div>
+            {% with last_message=conversation.messages.last %}
+            <p class="mb-0 mt-2 text-truncate">
+                {% if last_message %}
+                    {% if last_message.sender == request.user %}
+                        <strong>You:</strong> 
+                    {% else %}
+                        <strong>{{ last_message.sender.first_name }}:</strong> 
+                    {% endif %}
+                    {{ last_message.content }}
+                    
+                    {% if not last_message.is_read and last_message.sender != request.user %}
+                    <span class="badge bg-danger ms-2">New</span>
+                    {% endif %}
+                {% else %}
+                    Start a conversation...
+                {% endif %}
+            </p>
+            {% endwith %}
+        </a>
+        {% endwith %}
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="card text-center py-5">
+        <div class="card-body">
+            <i class="bi bi-chat-text fs-1 text-danger mb-3"></i>
+            <h3>No Messages Yet</h3>
+            <p class="text-muted">Start a conversation with someone you're interested in</p>
+            <a href="{% url 'browse_profiles' %}" class="btn btn-danger mt-3">Browse Profiles</a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
