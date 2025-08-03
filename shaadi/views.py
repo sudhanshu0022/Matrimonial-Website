@@ -44,8 +44,8 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 return redirect('home')
-    else:
-        form = UserLoginForm()
+        else:
+         form = UserLoginForm()
     return render(request, 'registration/login.html', {'form': form})
 
 
