@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: matrimonial-website
+    env: python
+    plan: free
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py migrate
+      python manage.py collectstatic --noinput
+    startCommand: gunicorn rishta.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: rishta.settings
+      - key: DJANGO_SECRET_KEY
+        value: replace_this_with_a_real_secret_key
+      - key: DJANGO_ALLOWED_HOSTS
+        value: matrimonial-website.onrender.com
+      - key: DEBUG
+        value: False
