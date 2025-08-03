@@ -25,14 +25,20 @@ def logout_view(request):
 def register_view(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            messages.success(request, 'Registration successful! Please complete your profile.')
-            return redirect('profile')
+        try:
+            if form.is_valid():
+                user = form.save()
+                login(request, user)
+                messages.success(request, 'Registration successful! Please complete your profile.')
+                return redirect('profile')
+            else:
+                messages.error(request, 'Form is invalid. Please check the inputs.')
+        except Exception as e:
+            messages.error(request, f'Registration failed: {e}')
     else:
         form = UserRegisterForm()
     return render(request, 'registration/register.html', {'form': form})
+
 
 def login_view(request):
     if request.method == 'POST':
